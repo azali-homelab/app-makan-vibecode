@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apa Nak Makan Tonight?</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+    body {
+      font-family: 'Share Tech Mono', monospace;
+      text-align: center;
+      background-color: #0d0221;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      color: #fff;
+      background-image: 
+        radial-gradient(circle at 50% 50%, #1a0b2e, #0d0221 100%),
+        linear-gradient(rgba(0, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 255, 0.05) 1px, transparent 1px);
+      background-size: 100% 100%, 30px 30px, 30px 30px;
+    }
+    h1 {
+      font-size: 3.5rem;
+      color: #0ff;
+      text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 20px #0ff;
+      margin-bottom: 2rem;
+      padding: 0 1rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    button {
+      background-color: transparent;
+      color: #f0f;
+      border: 3px solid #f0f;
+      padding: 15px 40px;
+      font-size: 1.8rem;
+      font-family: 'Share Tech Mono', monospace;
+      text-transform: uppercase;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 0 10px #f0f, inset 0 0 10px #f0f;
+      transition: all 0.2s;
+      text-shadow: 0 0 5px #f0f;
+      position: relative;
+      overflow: hidden;
+    }
+    button:before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 0, 255, 0.4), transparent);
+      transition: all 0.4s;
+    }
+    button:hover:before {
+      left: 100%;
+    }
+    button:hover, button:active {
+      background-color: rgba(255, 0, 255, 0.1);
+      box-shadow: 0 0 20px #f0f, inset 0 0 20px #f0f;
+    }
+    button:active {
+      transform: scale(0.95);
+    }
+    #result {
+      font-size: 3rem;
+      margin-top: 3rem;
+      font-weight: bold;
+      color: #ff0055;
+      text-shadow: 0 0 5px #ff0055, 0 0 15px #ff0055;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    @keyframes glitch {
+      0% { transform: scale(0.5); opacity: 0; filter: hue-rotate(90deg); }
+      50% { transform: scale(1.05) translate(5px, -5px); }
+      70% { transform: scale(1) translate(-5px, 5px); }
+      100% { transform: scale(1) translate(0); opacity: 1; filter: hue-rotate(0deg); }
+    }
+    .animate-pop { animation: glitch 0.3s cubic-bezier(.25,.46,.45,.94) forwards; }
+  </style>
+</head>
+<body>
+  <h1>Apa nak makan tonight? 🤔</h1>
+  <button onclick="pickDish()">Pilih untuk saya!</button>
+  <div id="result"></div>
+  <script>
+    const dishes = [
+      { name: "Nasi Lemak", emoji: "🍚" }, { name: "Roti Canai", emoji: "🫓" },
+      { name: "Laksa", emoji: "🍜" }, { name: "Satay", emoji: "🍢" },
+      { name: "Mee Goreng", emoji: "🍝" }, { name: "Cendol", emoji: "🍧" },
+      { name: "Rendang", emoji: "🥘" }, { name: "Teh Tarik", emoji: "☕" },
+      { name: "Mee Rebus", emoji: "🍲" }, { name: "Nasi Kerabu", emoji: "🥗" }
+    ];
+    function pickDish() {
+      const d = dishes[Math.floor(Math.random() * dishes.length)];
+      const res = document.getElementById("result");
+      res.classList.remove('animate-pop');
+      void res.offsetWidth; // trigger reflow
+      res.classList.add('animate-pop');
+      res.innerHTML = `${d.emoji} ${d.name} ${d.emoji}`;
+    }
+  </script>
+</body>
+</html>
